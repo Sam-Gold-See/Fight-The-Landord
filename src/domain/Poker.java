@@ -1,9 +1,8 @@
-package game;
+package domain;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-public class PokerGame {
+public class Poker {
 
 	static ArrayList<Integer> list = new ArrayList<>();
 	static HashMap<Integer, String> hashMap = new HashMap<>();
@@ -25,7 +24,7 @@ public class PokerGame {
 		hashMap.put(index++, "大王");
 	}
 
-	public PokerGame() {
+	public Poker() {
 		Collections.shuffle(list);
 
 		TreeSet<Integer> lord = new TreeSet<>();
@@ -44,18 +43,5 @@ public class PokerGame {
 			else
 				player3.add(poker);
 		}
-
-		lookPoker("底牌", lord);
-		lookPoker("张三", player1);
-		lookPoker("李四", player2);
-		lookPoker("王五", player3);
-
-	}
-
-	public void lookPoker(String name, TreeSet<Integer> pokers) {
-		System.out.print(name + ": ");
-		for (int poker : pokers)
-			System.out.print(hashMap.get(poker) + " ");
-		System.out.println();
 	}
 }
