@@ -1,4 +1,4 @@
-package ui;
+package game;
 
 import domain.User;
 import util.Code;
