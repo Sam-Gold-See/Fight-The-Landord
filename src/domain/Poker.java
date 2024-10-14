@@ -34,12 +34,12 @@ public class Poker extends JLabel implements MouseListener {
 		this.addMouseListener(this);
 	}
 
-	private void turnBack() {
+	public void turnBack() {
 		this.setIcon(new ImageIcon(imagePath + "rear.png"));
 		this.side = false;
 	}
 
-	private void turnFront() {
+	public void turnFront() {
 		this.setIcon(new ImageIcon(imagePath + this.name + ".png"));
 		this.side = true;
 	}
