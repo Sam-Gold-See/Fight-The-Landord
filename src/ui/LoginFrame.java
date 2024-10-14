@@ -8,14 +8,15 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LoginFrame extends JFrame implements MouseListener {
 
 	static ArrayList<User> users = new ArrayList<>();
 
 	static {
-		users.add(new User("zhangsan", "123456"));
-		users.add(new User("lisi", "123456"));
+		users.add(new User("admin", "123456"));
+		users.add(new User("guest", "123456"));
 	}
 
 	String loginImagePath = "image/login/";
@@ -26,6 +27,7 @@ public class LoginFrame extends JFrame implements MouseListener {
 	JLabel rightCode = new JLabel();
 	JButton login = new JButton();
 	JButton register = new JButton();
+	JButton check = new JButton();
 
 	public LoginFrame() {
 		initJFrame();
@@ -63,6 +65,7 @@ public class LoginFrame extends JFrame implements MouseListener {
 		passwordText.setBounds(200, 95, 40, 22);
 		this.getContentPane().add(passwordText);
 
+		password.setEchoChar('*');
 		password.setBounds(260, 90, 160, 30);
 		this.getContentPane().add(password);
 
@@ -98,6 +101,13 @@ public class LoginFrame extends JFrame implements MouseListener {
 		register.setContentAreaFilled(false);
 		register.addMouseListener(this);
 		this.getContentPane().add(register);
+
+		check.setBounds(430, 90, 18, 29);
+		check.setIcon(new ImageIcon(loginImagePath + "check.png"));
+		check.setBorderPainted(false);
+		check.setContentAreaFilled(false);
+		check.addMouseListener(this);
+		this.getContentPane().add(check);
 
 		JLabel background = new JLabel(new ImageIcon(loginImagePath + "background.png"));
 		background.setBounds(0, 0, 633, 423);
@@ -153,16 +163,24 @@ public class LoginFrame extends JFrame implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		if (e.getSource() == login)
 			login.setIcon(new ImageIcon(loginImagePath + "loginPressed.png"));
-		else
+		else if (e.getSource() == register)
 			register.setIcon(new ImageIcon(loginImagePath + "registerPressed.png"));
+		else if (e.getSource() == check) {
+			check.setIcon(new ImageIcon(loginImagePath + "checkPressed.png"));
+			password.setEchoChar((char) 0);
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if (e.getSource() == login)
 			login.setIcon(new ImageIcon(loginImagePath + "login.png"));
-		else
+		else if (e.getSource() == register)
 			register.setIcon(new ImageIcon(loginImagePath + "register.png"));
+		else if (e.getSource() == check) {
+			check.setIcon(new ImageIcon(loginImagePath + "check.png"));
+			password.setEchoChar('*');
+		}
 	}
 
 	@Override
