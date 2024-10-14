@@ -28,7 +28,7 @@ public class Code {
 
 		randomIndex = random.nextInt(5);
 		chars[4] = chars[randomIndex];
-		chars[randomIndex] = (char) ('a' + randomIndex);
+		chars[randomIndex] = (char) ('0' + number);
 
 		return new String(chars);
 	}
