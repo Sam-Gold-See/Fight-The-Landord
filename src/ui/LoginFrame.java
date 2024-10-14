@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LoginFrame extends JFrame implements MouseListener {
 
@@ -40,7 +39,7 @@ public class LoginFrame extends JFrame implements MouseListener {
 	private void initJFrame() {
 		this.setSize(633, 423);
 		this.setTitle("斗地主游戏 v1.0 登录");
-		this.setDefaultCloseOperation(3);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setAlwaysOnTop(true);
 		this.setLayout(null);
@@ -49,7 +48,7 @@ public class LoginFrame extends JFrame implements MouseListener {
 	private void initView() {
 
 		JLabel usernameText = new JLabel("用户名");
-		Font usernameFont = new Font(null, 1, 16);
+		Font usernameFont = new Font(null, Font.BOLD, 16);
 		usernameText.setFont(usernameFont);
 		usernameText.setForeground(Color.WHITE);
 		usernameText.setBounds(140, 50, 55, 22);
@@ -59,7 +58,7 @@ public class LoginFrame extends JFrame implements MouseListener {
 		this.getContentPane().add(username);
 
 		JLabel passwordText = new JLabel("密码");
-		Font passwordFont = new Font(null, 1, 16);
+		Font passwordFont = new Font(null, Font.BOLD, 16);
 		passwordText.setFont(passwordFont);
 		passwordText.setForeground(Color.WHITE);
 		passwordText.setBounds(200, 95, 40, 22);
@@ -70,7 +69,7 @@ public class LoginFrame extends JFrame implements MouseListener {
 		this.getContentPane().add(password);
 
 		JLabel codeText = new JLabel("验证码");
-		Font codeFont = new Font(null, 1, 16);
+		Font codeFont = new Font(null, Font.BOLD, 16);
 		codeText.setFont(codeFont);
 		codeText.setForeground(Color.WHITE);
 		codeText.setBounds(220, 140, 55, 22);
@@ -80,7 +79,7 @@ public class LoginFrame extends JFrame implements MouseListener {
 		this.getContentPane().add(code);
 
 		String codeStr = Code.getCode();
-		Font rightCodeFont = new Font(null, 1, 16);
+		Font rightCodeFont = new Font(null, Font.BOLD, 16);
 		rightCode.setForeground(Color.RED);
 		rightCode.setFont(rightCodeFont);
 		rightCode.setText(codeStr);
