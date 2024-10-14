@@ -1,4 +1,4 @@
-package ui;
+package game;
 
 import domain.Poker;
 
@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameFrame extends JFrame implements ActionListener {
 
@@ -102,11 +103,74 @@ public class GameFrame extends JFrame implements ActionListener {
 	}
 
 	public void initCard() {
+		for (int i = 1; i <= 5; i++) {
+			for (int j = 1; j <= 13; j++)
+				if (i == 5 && j > 2)
+					break;
+				else {
+					Poker poker = new Poker(i + "-" + j, false);
+					poker.setLocation(370, 180);
+					pokerList.add(poker);
+					container.add(poker);
+				}
+		}
+
+		Collections.shuffle(pokerList);
+
+		ArrayList<Poker> player0 = new ArrayList<>();
+		ArrayList<Poker> player1 = new ArrayList<>();
+		ArrayList<Poker> player2 = new ArrayList<>();
+
+		for (int i = 0; i < pokerList.size(); i++) {
+			Poker poker = pokerList.get(i);
+			if (i <= 2) {
+				lordList.add(poker);
+				Common.move(poker, poker.getLocation(), new Point(270 + (75 * i), 10));
+			} else if (i % 3 == 0) {
+				player0.add(poker);
+				Common.move(poker, poker.getLocation(), new Point(50, 60 + i * 5));
+			} else if (i % 3 == 1) {
+				poker.turnFront();
+				player1.add(poker);
+				Common.move(poker, poker.getLocation(), new Point(180 + i * 7, 450));
+			} else {
+				player2.add(poker);
+				Common.move(poker, poker.getLocation(), new Point(700, 60 + i * 5));
+			}
+			container.setComponentZOrder(poker, 0);
+		}
+
+		playerList.add(player0);
+		playerList.add(player1);
+		playerList.add(player2);
+
+		for (int i = 0; i < 3; i++) {
+			order(playerList.get(i));
+			Common.rePosition(this, playerList.get(i), i);
+		}
+	}
+
+	public void order(ArrayList<Poker> player) {
 
 	}
 
-	public void initGame() {
+	public int getValue(Poker poker) {
+		return 0;
+	}
 
+	public void initGame() {
+		for(int i=0;i<3;i++){
+			ArrayList<Poker> list = new ArrayList<>();
+			currentList.add(list);
+		}
+
+		landlord[0].setVisible(true);
+		landlord[1].setVisible(true);
+
+		for(JTextField field:time){
+			field.setText("倒计时30秒");
+			field.setVisible(true);
+		}
 	}
 
 	@Override
