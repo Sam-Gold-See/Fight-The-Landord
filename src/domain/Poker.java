@@ -1,47 +1,107 @@
 package domain;
 
-import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Poker {
+public class Poker extends JLabel implements MouseListener {
 
-	static ArrayList<Integer> list = new ArrayList<>();
-	static HashMap<Integer, String> hashMap = new HashMap<>();
+	private String name;
 
-	static {
-		String[] colors = {"♠", "♥", "♣", "♦"};
-		String[] numbers = {"3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"};
+	private boolean side;
 
-		int index = 1;
-		for (String number : numbers)
-			for (String color : colors) {
-				list.add(index);
-				hashMap.put(index++, color + number);
-			}
-		list.add(index);
-		hashMap.put(index++, "小王");
+	private boolean click = false;
 
-		list.add(index);
-		hashMap.put(index++, "大王");
+	private boolean clicked = false;
+
+	private static final String imagePath = "image/poker/";
+
+	public Poker(String name, boolean side) {
+		this.name = name;
+		this.side = side;
+
+		if (this.side) {
+			this.setIcon(new ImageIcon(imagePath + this.name + ".png"));
+			this.side = true;
+		} else {
+			this.setIcon(new ImageIcon(imagePath + "rear.png"));
+			this.side = false;
+		}
+
+		this.setSize(71, 96);
+
+		this.setVisible(true);
+
+		this.addMouseListener(this);
 	}
 
-	public Poker() {
-		Collections.shuffle(list);
-
-		TreeSet<Integer> lord = new TreeSet<>();
-		TreeSet<Integer> player1 = new TreeSet<>();
-		TreeSet<Integer> player2 = new TreeSet<>();
-		TreeSet<Integer> player3 = new TreeSet<>();
-
-		for (int i = 0; i < list.size(); i++) {
-			int poker = list.get(i);
-			if (i <= 2)
-				lord.add(poker);
-			else if (i % 3 == 0)
-				player1.add(poker);
-			else if (i % 3 == 1)
-				player2.add(poker);
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (click) {
+			int step;
+			if (clicked)
+				step = 20;
 			else
-				player3.add(poker);
+				step = -20;
+			clicked = !clicked;
+
+			Point from = this.getLocation();
+			Point to = new Point(from.x, from.y + step);
+			this.setLocation(to);
 		}
 	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean getSide() {
+		return side;
+	}
+
+	public void setSide(boolean side) {
+		this.side = side;
+	}
+
+	public boolean getClick() {
+		return click;
+	}
+
+	public void setClick(boolean click) {
+		this.click = click;
+	}
+
+	public boolean getClicked() {
+		return clicked;
+	}
+
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
+	}
+
 }
