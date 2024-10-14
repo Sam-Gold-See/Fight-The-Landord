@@ -29,6 +29,8 @@ public class LoginFrame extends JFrame implements MouseListener {
 	JButton check = new JButton();
 
 	public LoginFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("image/poker/dizhu.png"));
+
 		initJFrame();
 
 		initView();
