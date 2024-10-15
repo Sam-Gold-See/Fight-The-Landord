@@ -151,15 +151,19 @@ public class GameFrame extends JFrame implements ActionListener {
 	}
 
 	public void order(ArrayList<Poker> player) {
+		player.sort((o1, o2) -> {
+			int value1 = o1.getValue();
+			int value2 = o2.getValue();
 
-	}
-
-	public int getValue(Poker poker) {
-		return 0;
+			if (value1 == value2)
+				return o2.getColor() - o1.getColor();
+			else
+				return value1 - value2;
+		});
 	}
 
 	public void initGame() {
-		for(int i=0;i<3;i++){
+		for (int i = 0; i < 3; i++) {
 			ArrayList<Poker> list = new ArrayList<>();
 			currentList.add(list);
 		}
@@ -167,7 +171,7 @@ public class GameFrame extends JFrame implements ActionListener {
 		landlord[0].setVisible(true);
 		landlord[1].setVisible(true);
 
-		for(JTextField field:time){
+		for (JTextField field : time) {
 			field.setText("倒计时30秒");
 			field.setVisible(true);
 		}
