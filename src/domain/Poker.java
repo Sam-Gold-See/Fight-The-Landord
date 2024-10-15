@@ -80,6 +80,22 @@ public class Poker extends JLabel implements MouseListener {
 
 	}
 
+	public int getColor() {
+		return name.charAt(0) - '0';
+	}
+
+	public int getValue() {
+		int value = Integer.parseInt(name.substring(2));
+		int color = getColor();
+
+		if (color == 5)
+			value += 100;
+		if (value == 1 || value == 2)
+			value += 20;
+
+		return value;
+	}
+
 	public String getName() {
 		return name;
 	}
